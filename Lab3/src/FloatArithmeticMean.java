@@ -9,7 +9,7 @@ public class FloatArithmeticMean {
 		else {
 			for (String i : args) {
 				float arg = Float.parseFloat(i);
-				System.out.printf("%.3f" ,arg);
+				System.out.printf("%10.3f" ,arg);
 				System.out.print("\n");
 				sum+=arg;
 			}
@@ -17,8 +17,8 @@ public class FloatArithmeticMean {
 			float mean = sum/args.length;
 			
 			System.out.println("----------");
-			System.out.printf("%.3f" ,sum);
-			System.out.println();
+			System.out.printf("%10.3f" ,sum);
+			System.out.println("\n");
 			
 			System.out.print("Srednia arytmetyczna: ");
 			System.out.printf("%.4f" ,mean);
