@@ -2,20 +2,22 @@ public class ArithmeticMean {
 
 	public static void main(String[] args) {
 		
-		int sum = 0;
-		
-		System.out.print("Srednia liczb: ");
-		
-		for (String i : args) {
-			int arg = Integer.parseInt(i);
-			System.out.print(arg+", ");
-			sum+=arg;
+		if (args.length == 0) {
+			System.out.println("Brak argumentów programu.");
+			return;
 		}
-		System.out.print("wynosi: ");
-		int mean = sum/args.length;
-		System.out.println(mean);
-		
-
+			
+		int sum = Integer.parseInt(args[0]);
+			
+		System.out.print("Srednia liczb: " + args[0]);
+			
+		for (int i = 1; i<args.length;i++) {
+				System.out.print(", "+args[i]);
+				sum+=Integer.parseInt(args[i]);
+			} 
+		System.out.println(" wynosi " + sum/args.length + (sum%args.length!=0 ? (", reszta: "+ sum%args.length) : ""));
+				
 	}
 
 }
+
