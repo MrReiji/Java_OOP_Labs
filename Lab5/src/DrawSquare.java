@@ -11,8 +11,9 @@ public class DrawSquare {
 			sc.close();
 			return;
 		}
-		else {
+		
 			int l = sc.nextInt();
+			
 			if (l<=0) {
 				System.out.println("Blad danych wejsciowych");
 				sc.close();
@@ -25,12 +26,7 @@ public class DrawSquare {
 			}
 			System.out.println("#".repeat(l));
 			
-		}
 		
 		sc.close();
-		
-		
-
 	}
-
 }
