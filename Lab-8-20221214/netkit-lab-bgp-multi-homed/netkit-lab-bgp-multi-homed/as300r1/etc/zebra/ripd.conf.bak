@@ -1,9 +1,0 @@
-!
-hostname ripd
-password zebra
-!
-router rip
-network 138.1.0.0/18
-redistribute bgp 300 subnets
-!
-log file /var/log/zebra/ripd.log
