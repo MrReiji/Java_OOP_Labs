@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 
 public class Calculator {
 
-	static String s0 = "0";
-	static String s1 = "";
-	static String s2 = "";
+    static String s0 = "0";
+    static String s1 = "";
+    static String s2 = "";
     static String lastButton = "";
 
     static boolean lastResult = false;
@@ -44,19 +44,19 @@ public class Calculator {
 
     }
 
-	
+
 
     public static void createAndShowGUI() {
 
-    	JTextField resultTextField = new JTextField("0", 24);
-    	
-    	ActionListener myActionListener = new ActionListener() {
-    		public void actionPerformed(ActionEvent e) {
-    			String s = e.getActionCommand();
-    			System.out.println("Button = "+s);
-    			if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
+        JTextField resultTextField = new JTextField("0", 24);
+
+        ActionListener myActionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String s = e.getActionCommand();
+                System.out.println("Button = "+s);
+                if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     resultTextField.setForeground(new Color(0, 0, 0));
-    	            // if operand is present then add to second no
+                    // if operand is present then add to second no
 
                     if (lastResult || lastButton.equals("=")) {
                         s0 = "";
@@ -65,27 +65,30 @@ public class Calculator {
                         resultTextField.setText(s0);
                         s1 = s2 = "";
                     }
-    	            else if (!s1.equals("")) {
+                    else if (!s1.equals("")) {
+                        if (s2.equals("0"))
+                            s2 = "";
                         s2 = s2 + s;
                         resultTextField.setText(s2);
                     }
-    	            else {
+                    else {
                         if (s0.equals("0"))
                             s0 = "";
                         s0 = s0 + s;
                         resultTextField.setText(s0);
                     }
                 }
-    	        else if (s.charAt(0) == 'C') {
-    	            // clear the one letter
+                else if (s.charAt(0) == 'C') {
+                    // clear the one letter
+                    resultTextField.setForeground(new Color(0, 0, 0));
                     s0 = "0";
-    	            s1 = s2 = "";
+                    s1 = s2 = "";
                     lastResult = false;
-    	 
-    	            // set the value of text
-    	            resultTextField.setText(s0 + s1 + s2);
-    	        }
-    	        else if (s.charAt(0) == '=') {
+
+                    // set the value of text
+                    resultTextField.setText(s0 + s1 + s2);
+                }
+                else if (s.charAt(0) == '=') {
                     if (s1.equals("/") && s2.equals("0")) {
                         resultTextField.setForeground(new Color(255, 0, 0));
                         resultTextField.setText("ERROR: Division by zero");
@@ -96,8 +99,8 @@ public class Calculator {
                             s2 = s0;
                         equalFunction(resultTextField, false);
                     }
-    	        }
-    	        else if (s.charAt(0) != '=')  {
+                }
+                else if (s.charAt(0) != '=')  {
                     //If there was operand
 
                     if (lastResult){
@@ -107,7 +110,13 @@ public class Calculator {
                     }
 
                     if (!s2.equals("")) {
-                        equalFunction(resultTextField, true);
+                        if (s1.equals("/") && s2.equals("0")) {
+                            resultTextField.setForeground(new Color(255, 0, 0));
+                            resultTextField.setText("ERROR: Division by zero");
+                            s0 = s1 = s2 = "";
+                        }
+                        else
+                            equalFunction(resultTextField, true);
                     }
 
                     if (!s1.equals("")){
@@ -118,11 +127,11 @@ public class Calculator {
                         s1 = s;
                 }
                 lastButton = s;
-    		}
-    	};
-    	
-    	
-    	
+            }
+        };
+
+
+
         JFrame jf = new JFrame("My First Calculator - v.0.1");
         jf.setLayout(new BoxLayout(jf.getContentPane(), BoxLayout.Y_AXIS));
         jf.setPreferredSize(new Dimension(450, 230));
@@ -132,7 +141,7 @@ public class Calculator {
         JPanel resultJp = new JPanel();
         jf.getContentPane().add(resultJp, BorderLayout.CENTER);
 
-        
+
         resultTextField.setEditable(false);
         resultTextField.setHorizontalAlignment(JTextField.RIGHT);
         resultTextField.setFont(new Font("Arial", Font.BOLD, 20));
@@ -142,7 +151,7 @@ public class Calculator {
         JPanel buttonsJp = new JPanel(new GridLayout(4,4,10,10));
         jf.getContentPane().add(buttonsJp);
 
-        
+
         JButton b1 = new JButton("1");
         b1.addActionListener(myActionListener);
         JButton b2 = new JButton("2");
@@ -175,8 +184,8 @@ public class Calculator {
         bC.addActionListener(myActionListener);
         JButton bD = new JButton("/");
         bD.addActionListener(myActionListener);
-        
-        
+
+
         buttonsJp.add(b1);
         buttonsJp.add(b2);
         buttonsJp.add(b3);
